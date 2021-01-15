@@ -1,5 +1,5 @@
 # seek-and-read-HDD
-This project provides tools for testing seek and scanning consecutive blocks time on HDD. This document introduces how these tools are used. FileGenerator, TestScan, TestSeek and AnalyzeSeek should be transformed to executable jar file at the beginning. You can modify the pom.xml to specify a Main Class and then use `mvn package` command. Please put FileGenerator.jar, TestScan.jar, TestSeek.jar, AnalyzeSeek.jar and test_scan.sh in the same directory.
+This project provides tools for testing time of seek and scanning consecutive blocks on HDD. This document introduces how these tools are used. FileGenerator, TestScan, TestSeek and AnalyzeSeek should be transformed to executable jar file at the beginning. You can modify the pom.xml to specify a Main Class and then use `mvn package` command. Please put FileGenerator.jar, TestScan.jar, TestSeek.jar, AnalyzeSeek.jar and test_scan.sh in the same directory.
 
 ## Generate a File
 
