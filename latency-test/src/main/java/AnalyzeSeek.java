@@ -35,7 +35,7 @@ public class AnalyzeSeek {
   public static void analyze(ArrayList<File> files) throws IOException {
     for (File file : files) {
       analyze(file);
-      file.delete();
+//      file.delete();
     }
   }
 
