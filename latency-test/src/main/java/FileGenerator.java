@@ -6,7 +6,13 @@ import java.nio.channels.FileChannel;
 
 public class FileGenerator {
 
-  private static void createFixLengthFile(File file, long length) throws IOException {
+  /**
+   * Generate a file given length. The file will be filled with zeroes.
+   *
+   * @param file,   output file
+   * @param length, length of the file
+   */
+  private static void generateFile(File file, long length) throws IOException {
     long start = System.currentTimeMillis();
     FileOutputStream fos = null;
     FileChannel output = null;
@@ -31,64 +37,18 @@ public class FileGenerator {
         "A file is created: " + file.getAbsolutePath() + ", takes " + (end - start) + " ms");
   }
 
-  private static boolean isNum(char c) {
-    return c >= '0' && c <= '9';
-  }
-
-  private enum UNIT {
-    B, BYTES, BYTE, K, KB, M, MB, G, GB, T, TB
-  }
-
-  private static long getUnit(String unitString) {
-    long unit = 1;
-    switch (UNIT.valueOf(unitString.toUpperCase())) {
-      case B:
-      case BYTES:
-      case BYTE:
-        unit = 1;
-        break;
-      case K:
-      case KB:
-        unit = 1024;
-        break;
-      case M:
-      case MB:
-        unit = (long) Math.pow(1024, 2);
-        break;
-      case G:
-      case GB:
-        unit = (long) Math.pow(1024, 3);
-        break;
-      case T:
-      case TB:
-        unit = (long) Math.pow(1024, 4);
-        break;
-      default:
-        throw new IllegalArgumentException("Unrecognized unit string: \"" + unitString + "\"");
-    }
-    return unit;
-  }
 
   public static void main(String[] args) throws IOException {
     if (args.length > 0) {
       String fileName = args[0];
       String sizeString = args[1];
-      int size = 0;
-      String unitString = "";
-      for (int i = 0; i < sizeString.length(); i++) {
-        if (!isNum(sizeString.charAt(i))) {
-          size = Integer.parseInt(sizeString.substring(0, i));
-          unitString = sizeString.substring(i);
-          break;
-        }
-      }
-      long unit = getUnit(unitString);
+      long length = Util.getLength(sizeString);
       File file = new File(fileName);
       if (file.exists()) {
         file.delete();
       }
       file.createNewFile();
-      createFixLengthFile(file, size * unit);
+      generateFile(file, length);
     }
   }
 
