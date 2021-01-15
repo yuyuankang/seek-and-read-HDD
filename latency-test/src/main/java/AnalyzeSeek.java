@@ -23,12 +23,12 @@ public class AnalyzeSeek {
     double averageTime = (double) sum / counter;
     double speed = (double) blockSize * counter / sum;
     System.out.printf(
-        "File: %s;\n"
-            + "File size: %d(bytes);\n"
-            + "Block size: %d(bytes);\n"
-            + "Total time: %d(ms);\n"
-            + "Average time: %f(ms/blc);\n"
-            + "Seek Speed: %f(bytes/ms)%n",
+        "File: %s;\t"
+            + "File size: %d(bytes);\t"
+            + "Block size: %d(bytes);\t"
+            + "Total time: %d(ms);\t"
+            + "Average time: %f(ms/blc);\t"
+            + "Scan Speed: %f(bytes/ms)%n",
         testFile.getAbsolutePath(), fileSize, blockSize, sum, averageTime, speed);
   }
 

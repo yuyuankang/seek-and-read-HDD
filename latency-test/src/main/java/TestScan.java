@@ -21,7 +21,5 @@ public class TestScan {
       System.out.println(time);
       fileChannel.close();
     }
-
-
   }
 }
