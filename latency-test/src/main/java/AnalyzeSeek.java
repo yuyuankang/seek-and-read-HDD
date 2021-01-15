@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class AnalyzeSeek {
 
+  static File testFile;
+  static long fileSize;
+
   public static void analyze(File file) throws IOException {
     long sum = 0;
     long counter = 0;
@@ -20,12 +23,13 @@ public class AnalyzeSeek {
     double averageTime = (double) sum / counter;
     double speed = (double) blockSize * counter / sum;
     System.out.printf(
-        "Block size: %d(bytes);\n"
+        "File: %s;\n"
+            + "File size: %d(bytes);\n"
+            + "Block size: %d(bytes);\n"
             + "Total time: %d(ms);\n"
             + "Average time: %f(ms/blc);\n"
-            + "Scan Speed: %f(bytes/ms)%n",
-        blockSize, sum, averageTime, speed);
-
+            + "Seek Speed: %f(bytes/ms)%n",
+        testFile.getAbsolutePath(), fileSize, blockSize, sum, averageTime, speed);
   }
 
   public static void analyze(ArrayList<File> files) throws IOException {
@@ -36,7 +40,8 @@ public class AnalyzeSeek {
   }
 
   public static void main(String[] args) throws IOException {
-    String currentPath = args[0];
+    String testFilePath = args[0];
+    String currentPath = args[1];
     File[] files = new File(currentPath).listFiles();
     ArrayList<File> tempFiles = new ArrayList<>();
     for (File file : files) {
@@ -44,6 +49,8 @@ public class AnalyzeSeek {
         tempFiles.add(file);
       }
     }
+    testFile = new File(testFilePath);
+    fileSize = testFile.length();
     analyze(tempFiles);
   }
 }
